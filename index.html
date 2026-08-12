@@ -1,1 +1,1031 @@
-﻿<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>ping</title><body style="background:#0b2027;color:#2fd4b5;font:600 40px system-ui;display:grid;place-items:center;height:100vh;margin:0">GitHub Pages OK</body>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b2027">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Пульс бизнеса">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b2027'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='%231e4049' stroke-width='8'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='%232fd4b5' stroke-width='8' stroke-linecap='round' stroke-dasharray='95 126' transform='rotate(-90 32 32)'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Кольцо · чек-ап · Бизнес-помощник</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#071a1f;        /* сцена */
+  --deep:#0b2027;        /* корпус приложения */
+  --panel:#112e37;       /* карточки */
+  --panel-2:#0f272f;
+  --track:#1e4049;       /* трек кольца */
+  --mint:#2fd4b5;        /* норма */
+  --amber:#f5b74e;       /* внимание */
+  --coral:#ff7a6b;       /* риск */
+  --gold:#e8c06a;        /* уровни и награды */
+  --ink:#ffffff;
+  --muted:#8fa8ae;
+  --dim:#5d7880;
+  --line:rgba(255,255,255,.07);
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:
+    radial-gradient(900px 600px at 20% -10%, #0f3038 0%, transparent 60%),
+    radial-gradient(700px 500px at 95% 110%, #0e2b31 0%, transparent 55%),
+    var(--void);
+  color:var(--ink);
+  font-family:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  display:flex;flex-direction:column;align-items:center;
+  padding:28px 20px 56px;
+}
+
+/* ---------- шапка сцены ---------- */
+.stage-head{width:100%;max-width:940px;display:flex;flex-wrap:wrap;gap:16px;
+  align-items:flex-end;justify-content:space-between;margin-bottom:22px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim)}
+h1{font-size:23px;font-weight:700;letter-spacing:-.02em;margin-top:6px;line-height:1.25}
+h1 em{font-style:normal;color:var(--mint)}
+.nav{display:flex;gap:6px;background:rgba(255,255,255,.04);padding:5px;border-radius:99px;
+  border:1px solid var(--line)}
+.nav button{font:inherit;font-size:11.5px;font-weight:600;color:var(--muted);
+  background:none;border:0;padding:8px 12px;border-radius:99px;cursor:pointer;
+  transition:background .18s,color .18s}
+.nav button:hover{color:var(--ink)}
+.nav button[aria-selected="true"]{background:var(--mint);color:#06231f}
+.nav button:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+
+/* ---------- телефон ---------- */
+.phone{
+  width:392px;height:812px;border-radius:44px;background:var(--deep);
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:0 60px 120px -40px rgba(0,0,0,.85), 0 0 0 9px #04141a;
+  overflow:hidden;position:relative;display:flex;flex-direction:column;
+}
+.notch{position:absolute;top:11px;left:50%;transform:translateX(-50%);
+  width:104px;height:26px;border-radius:99px;background:#04141a;z-index:9}
+.status{display:flex;justify-content:space-between;align-items:center;
+  padding:16px 26px 0;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+.screen{flex:1;overflow-y:auto;padding:14px 22px 26px;scrollbar-width:thin;
+  scrollbar-color:var(--track) transparent}
+.screen::-webkit-scrollbar{width:5px}
+.screen::-webkit-scrollbar-thumb{background:var(--track);border-radius:9px}
+.screen[hidden]{display:none}
+
+.app-title{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.01em;
+  display:flex;align-items:center;gap:8px;margin:8px 0 18px}
+.dot{width:6px;height:6px;border-radius:99px;background:var(--mint);
+  box-shadow:0 0 0 4px rgba(47,212,181,.16)}
+
+/* ---------- кольцо ---------- */
+.ringwrap{display:flex;flex-direction:column;align-items:center;margin:6px 0 2px}
+.ring{position:relative;width:216px;height:216px}
+.ring svg{transform:rotate(-90deg);display:block}
+.ring circle{fill:none;stroke-linecap:round}
+.ring .bg{stroke:var(--track)}
+.ring .fg{stroke:var(--mint);transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.25,1),stroke .5s}
+.ring .center{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:2px}
+.big{font-size:60px;font-weight:800;letter-spacing:-.045em;line-height:1;
+  font-variant-numeric:tabular-nums}
+.big .delta{font-size:15px;font-weight:600;color:var(--mint);vertical-align:super;margin-left:3px}
+.cap{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--dim)}
+.badge{margin-top:16px;font-size:12.5px;font-weight:600;color:var(--mint);
+  background:rgba(47,212,181,.11);border:1px solid rgba(47,212,181,.24);
+  padding:7px 16px;border-radius:99px}
+
+.minis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px}
+.mini{background:var(--panel-2);border:1px solid var(--line);border-radius:14px;
+  padding:13px 8px 11px;text-align:center}
+.mini .val{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.mini .lbl{font-size:10.5px;color:var(--dim);margin-top:4px}
+.bar{height:3px;border-radius:9px;background:var(--track);margin:9px 6px 0;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:9px}
+
+.sect{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--dim);margin:26px 0 11px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px 16px;margin-bottom:9px}
+.card .row{display:flex;gap:12px;align-items:flex-start}
+.cat{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;margin-bottom:7px}
+.cat.c1{color:var(--mint)} .cat.c2{color:var(--amber)} .cat.c3{color:var(--coral)}
+.cat.c0{color:var(--dim)} .cat.c4{color:var(--gold)}
+.tag{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:3px 8px;border-radius:6px;white-space:nowrap;margin-top:1px}
+.tag.risk{background:rgba(255,122,107,.14);color:var(--coral)}
+.tag.opp{background:rgba(47,212,181,.13);color:var(--mint)}
+.tag.gold{background:rgba(232,192,106,.14);color:var(--gold)}
+.card h4{font-size:14px;font-weight:600;line-height:1.35;margin-bottom:5px}
+.card p{font-size:12.5px;color:var(--muted);line-height:1.5}
+.money{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+
+.cta{width:100%;margin-top:22px;background:var(--mint);color:#06231f;border:0;
+  border-radius:15px;padding:17px;font:inherit;font-size:15px;font-weight:700;
+  cursor:pointer;transition:transform .12s,filter .18s}
+.cta:hover{filter:brightness(1.07)}
+.cta:active{transform:scale(.985)}
+.cta:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.cta.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);margin-top:9px}
+.cta-card{padding-bottom:14px}
+.cta .inline,.cta.inline{margin-top:14px;padding:14px;font-size:14px;border-radius:13px}
+.bar.wide{margin:14px 0 0;height:4px}
+.tag.solved{background:rgba(143,168,174,.16);color:#b9cdd2}
+.tag.prof{background:rgba(47,212,181,.13);color:var(--mint)}
+.tag.ther{background:rgba(245,183,78,.15);color:var(--amber)}
+.tag.surg{background:rgba(255,122,107,.14);color:var(--coral)}
+.tag.think{background:rgba(214,236,239,.12);color:#c4dde2}
+.scale{display:flex;gap:6px;margin:16px 0 4px}
+.scale div{flex:1;text-align:center;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
+  padding:7px 2px;border-radius:9px;background:var(--panel-2);border:1px solid var(--line);color:var(--dim)}
+.scale div b{display:block;font-size:8.5px;font-weight:400;margin-top:3px;color:var(--dim);opacity:.75}
+.scale div{line-height:1.3}
+.scale div.a1{color:var(--mint);border-color:rgba(47,212,181,.3)}
+.scale div.a2{color:var(--amber);border-color:rgba(245,183,78,.3)}
+.scale div.a3{color:var(--coral);border-color:rgba(255,122,107,.3)}
+.choice{display:flex;gap:8px;margin-top:12px}
+.choice button{flex:1;font:inherit;font-size:12.5px;font-weight:600;padding:10px;border-radius:11px;
+  cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);
+  transition:all .16s}
+.choice button.yes{background:var(--mint);color:#06231f;border-color:transparent}
+.choice button:hover{filter:brightness(1.08)}
+.choice button:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.ob{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px 16px;margin-bottom:10px}
+.ob .hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px}
+.ob .nm{font-size:13.5px;font-weight:700}
+.ob .med{font-size:11px;color:var(--dim)}
+.ob p{font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:6px}
+.ob.on{border-color:rgba(47,212,181,.35);background:linear-gradient(135deg,#12363c,#0f2b33)}
+.tog{display:flex;gap:7px;margin-top:11px}
+.tog button{flex:1;font:inherit;font-size:12px;font-weight:600;padding:9px;border-radius:10px;
+  border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);cursor:pointer}
+.tog button.sel{background:var(--mint);color:#06231f;border-color:transparent}
+.tog button:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.wk{display:flex;gap:5px;margin:4px 0 22px}
+.wk div{flex:1;text-align:center;padding:9px 0 8px;border-radius:99px;
+  background:rgba(255,255,255,.04);border:1px solid transparent}
+.wk div.today{border-color:var(--ink)}
+.wk .d{font-size:9.5px;color:var(--dim)}
+.wk .n{font-size:13px;font-weight:700;margin-top:1px}
+.wk .p{width:7px;height:7px;border-radius:99px;background:var(--track);margin:6px auto 0}
+.wk .p.on{background:var(--mint)}
+.jq{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;padding:13px 12px 13px 15px;margin-bottom:8px}
+.jq span{flex:1;font-size:13.5px;line-height:1.35}
+.jq button{flex:0 0 40px;height:36px;border-radius:10px;border:1px solid var(--line);
+  background:rgba(255,255,255,.03);color:var(--muted);font-size:15px;cursor:pointer;transition:all .15s}
+.jq button:hover{background:rgba(255,255,255,.07)}
+.jq button.on-no{background:rgba(255,122,107,.16);border-color:rgba(255,122,107,.4);color:var(--coral)}
+.jq button.on-yes{background:rgba(47,212,181,.16);border-color:rgba(47,212,181,.45);color:var(--mint)}
+.jq button:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.smart{background:linear-gradient(135deg,#14343d,#0f2a33);border:1px solid rgba(47,212,181,.22);
+  border-radius:var(--r);padding:13px 14px;margin-bottom:22px}
+.smart .hd{font-size:12.5px;font-weight:600;margin-bottom:10px}
+.smart .btns{display:flex;gap:8px}
+.smart .btns button{flex:1;font:inherit;font-size:12.5px;font-weight:600;padding:11px;border-radius:11px;
+  border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);cursor:pointer}
+.smart .btns button:hover{background:rgba(47,212,181,.14)}
+.jnote{width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:14px;
+  padding:13px 14px;color:var(--ink);font:inherit;font-size:13px;resize:none;outline:none;min-height:64px}
+.jnote::placeholder{color:var(--dim)}
+.jnote:focus{border-color:rgba(47,212,181,.4)}
+.journal{margin-top:18px;background:var(--panel);border:1px solid rgba(232,192,106,.22);
+  border-radius:var(--r);padding:15px 16px}
+.journal h4{font-size:13.5px;font-weight:600;margin-bottom:5px}
+.journal p{font-size:12.5px;color:var(--muted);line-height:1.5}
+.journal .cal{font-size:11.5px;color:var(--gold);margin-top:9px;padding-left:11px;
+  border-left:2px solid rgba(232,192,106,.4);line-height:1.45}
+.badge b{color:var(--ink)}
+.explain{font-size:12px;line-height:1.55;color:var(--dim);text-align:center;margin:16px 4px 0}
+.prof{background:var(--panel);border:1px solid rgba(232,192,106,.28);border-radius:var(--r);
+  padding:15px 16px;margin-top:18px}
+.prof-top{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+.prof-top b{color:var(--gold);font-variant-numeric:tabular-nums}
+.prof-note{font-size:11.5px;color:var(--gold);margin-top:10px;font-weight:600}
+.why{font-size:10.5px;color:var(--dim);line-height:1.45;margin-top:7px;padding-left:10px;
+  border-left:2px solid var(--track);opacity:.9}
+.skip{background:none;border:0;color:var(--dim);font:inherit;font-size:12px;cursor:pointer;
+  padding:8px 2px;text-decoration:underline;text-underline-offset:3px}
+.skip:hover{color:var(--muted)}
+.skip:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+
+.freeform{display:flex;gap:8px;margin-top:14px;align-items:center}
+.freeform input{flex:1;font:inherit;font-size:13px;color:var(--ink);
+  background:rgba(255,255,255,.04);border:1px solid var(--line);
+  border-radius:99px;padding:11px 16px;outline:none;transition:border-color .16s}
+.freeform input::placeholder{color:var(--dim)}
+.freeform input:focus{border-color:rgba(47,212,181,.45)}
+.freeform button{flex:0 0 40px;height:40px;border-radius:99px;border:0;cursor:pointer;
+  background:var(--track);color:var(--ink);font-size:17px;line-height:1;
+  transition:background .16s,color .16s}
+.freeform button:hover{background:var(--mint);color:#06231f}
+.freeform button:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.freeform[hidden]{display:none}
+
+/* ---------- чек-ап ---------- */
+.qhead{display:flex;align-items:center;gap:13px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.qring{width:44px;height:44px;position:relative;flex:0 0 44px}
+.qring svg{transform:rotate(-90deg)}
+.qring circle{fill:none;stroke-linecap:round}
+.qring .bg{stroke:var(--track)}
+.qring .fg{stroke:var(--mint);transition:stroke-dashoffset .55s ease}
+.qring b{position:absolute;inset:0;display:grid;place-items:center;font-size:11px;
+  font-weight:700;font-variant-numeric:tabular-nums}
+.qmeta{flex:1}
+.qmeta .t{font-size:12.5px;font-weight:600}
+.qmeta .s{font-size:11px;color:var(--dim);margin-top:2px}
+
+.msg{max-width:88%;font-size:14px;line-height:1.5;padding:13px 15px;border-radius:16px;
+  margin-top:12px;animation:rise .32s ease both}
+.msg.bot{background:var(--panel);border-top-left-radius:5px}
+.msg.me{background:var(--mint);color:#06231f;margin-left:auto;border-top-right-radius:5px;font-weight:500}
+.msg p{margin:0}
+.msg.bot p:first-child:not(:only-child){color:var(--muted);font-size:13px}
+@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.chip{font:inherit;font-size:13px;font-weight:500;color:var(--ink);
+  background:rgba(255,255,255,.05);border:1px solid var(--line);
+  padding:10px 15px;border-radius:99px;cursor:pointer;transition:all .16s}
+.chip:hover{background:rgba(47,212,181,.13);border-color:rgba(47,212,181,.4)}
+.chip:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+
+/* ---------- уровни ---------- */
+.lvl{border-radius:var(--r);padding:16px;margin-bottom:10px;border:1px solid var(--line);
+  background:var(--panel-2);position:relative;overflow:hidden}
+.lvl.on{background:linear-gradient(135deg,#12363c,#0f2b33);border-color:rgba(47,212,181,.32)}
+.lvl.now{background:linear-gradient(135deg,#173c40,#102e35);border-color:rgba(232,192,106,.45)}
+.lvl .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+.lvl .nm{font-size:13px;font-weight:700}
+.lvl .pc{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+.lvl ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.lvl li{font-size:12.5px;color:var(--muted);padding-left:16px;position:relative;line-height:1.4}
+.lvl li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;
+  border-radius:99px;background:var(--track)}
+.lvl.on li::before,.lvl.now li::before{background:var(--mint)}
+.lvl.locked{opacity:.5}
+.state{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.lvl.now .state{color:var(--gold)}
+.lvl.on .state{color:var(--mint)}
+
+.footnote{max-width:392px;margin-top:22px;font-size:12px;line-height:1.6;color:var(--dim);text-align:center}
+.footnote b{color:var(--muted);font-weight:600}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+/* ============================================================
+   МОБИЛЬНЫЙ РЕЖИМ: макет телефона превращается в само приложение
+   ============================================================ */
+@media (max-width:760px), (pointer:coarse) and (max-width:900px){
+  html{height:100%}
+  body{
+    height:100vh;height:100dvh;
+    padding:0;display:block;overflow:hidden;
+    background:var(--deep);
+    -webkit-tap-highlight-color:transparent;
+    overscroll-behavior:none;
+  }
+  button,.chip,.nav button{touch-action:manipulation}
+
+  /* корпус телефона = вся страница */
+  .phone{
+    width:100%;max-width:none;height:100vh;height:100dvh;
+    border-radius:0;border:0;box-shadow:none;
+  }
+  .notch{display:none}
+  .status{display:none}         /* настоящая шторка телефона вместо нарисованной */
+  .footnote{display:none}
+
+  .screen{
+    padding:calc(env(safe-area-inset-top) + 18px) 20px
+            calc(78px + env(safe-area-inset-bottom));
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+  }
+  .app-title{margin-top:0}
+
+  /* шапка сцены → плавающая панель переключения экранов внизу */
+  .stage-head{
+    position:fixed;left:0;right:0;bottom:0;z-index:30;
+    max-width:none;margin:0;display:block;
+    padding:7px 10px calc(7px + env(safe-area-inset-bottom));
+    background:rgba(7,26,31,.93);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);
+  }
+  .stage-head .titles{display:none}
+  .nav{
+    width:100%;flex-wrap:nowrap;overflow-x:auto;gap:4px;padding:4px;
+    border-radius:14px;background:rgba(255,255,255,.03);
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .nav::-webkit-scrollbar{display:none}
+  .nav button{flex:0 0 auto;font-size:12px;padding:9px 13px}
+
+  /* iOS не зумит поле ввода, если шрифт ≥16px */
+  .freeform input{font-size:16px;padding:12px 16px}
+
+  .ring{width:200px;height:200px}
+  .ring svg{width:200px;height:200px}
+}
+
+/* узкие телефоны (iPhone SE / 360px) */
+@media (max-width:380px){
+  .screen{padding-left:16px;padding-right:16px}
+  .big{font-size:52px}
+  .minis{gap:6px}
+  .mini{padding:11px 5px 9px}
+  .mini .val{font-size:17px}
+  .mini .lbl{font-size:9.5px}
+}
+
+/* телефон в альбомной ориентации — не даём кольцу съесть весь экран */
+@media (orientation:landscape) and (max-height:520px){
+  .ring,.ring svg{width:176px;height:176px}
+  .big{font-size:40px}
+  .cap{font-size:8px;letter-spacing:.12em}
+  .badge{margin-top:12px}
+  .screen{padding-top:calc(env(safe-area-inset-top) + 12px)}
+}
+
+/* ---- ритм поступлений ---- */
+.radar{display:flex;align-items:center;gap:12px;background:var(--panel-2);
+  border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-top:9px}
+.radar .ic{flex:0 0 34px;height:34px;border-radius:99px;display:grid;place-items:center;
+  background:rgba(47,212,181,.12);color:var(--mint);font-size:15px}
+.radar.warn .ic{background:rgba(245,183,78,.14);color:var(--amber)}
+.radar .bd{flex:1}
+.radar .t{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+  font-family:"IBM Plex Mono",monospace}
+.radar .v{font-size:14px;font-weight:600;margin-top:3px}
+.radar.warn .v{color:var(--amber)}
+.radar .s{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+.hscale{margin:6px 0 18px}
+.hscale .lbls{display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;font-family:"IBM Plex Mono",monospace;margin-bottom:8px}
+.hscale .lbls .a{color:var(--coral)} .hscale .lbls .b{color:var(--mint)}
+.hscale .rail{height:6px;border-radius:99px;position:relative;
+  background:linear-gradient(90deg,rgba(255,122,107,.5),rgba(245,183,78,.5),rgba(47,212,181,.85))}
+.hscale .knob{position:absolute;top:-5px;width:16px;height:16px;border-radius:99px;
+  background:var(--ink);border:3px solid var(--deep)}
+.pulse{margin-top:18px;background:var(--panel-2);border:1px solid var(--line);
+  border-radius:14px;padding:12px 14px}
+.pulse-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.pulse-top span{font-size:11px;color:var(--dim)}
+.pulse-top b{font-size:12px;color:var(--ink);font-weight:600}
+.pulse svg{display:block;width:100%;height:34px}
+
+/* ---- экран ритма ---- */
+.tier{display:flex;gap:12px;padding:14px 14px;border-radius:var(--r);margin-bottom:9px;
+  background:var(--panel-2);border:1px solid var(--line);align-items:flex-start}
+.tier .depth{flex:0 0 5px;border-radius:9px;background:var(--track);align-self:stretch}
+.tier .bd{flex:1}
+.tier .hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tier .nm{font-size:13px;font-weight:700}
+.tier .st{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.tier .med{font-size:11px;color:var(--dim);margin-top:2px}
+.tier p{font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:8px}
+.tier.live{border-color:rgba(47,212,181,.3)}
+.tier.live .depth{background:var(--mint)}
+.tier.live .st{color:var(--mint)}
+.tier.next{border-color:rgba(232,192,106,.35)}
+.tier.next .depth{background:var(--gold)}
+.tier.next .st{color:var(--gold)}
+
+/* ---- долголетие ---- */
+.gauge{display:flex;align-items:center;gap:18px;background:var(--panel);
+  border:1px solid var(--line);border-radius:var(--r);padding:18px 16px}
+.gauge .num{font-size:44px;font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--mint)}
+.gauge .lbl{font-size:12.5px;color:var(--muted);line-height:1.45}
+.drv{margin-top:9px;background:var(--panel-2);border:1px solid var(--line);
+  border-radius:14px;padding:13px 14px}
+.drv-row{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.drv-row:last-child{margin-bottom:0}
+.drv-row .t{flex:1;font-size:12.5px;color:var(--muted)}
+.drv-row .v{font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;width:26px;text-align:right}
+.drv-row .track{flex:0 0 78px;height:4px;border-radius:9px;background:var(--track);overflow:hidden}
+.drv-row .track i{display:block;height:100%;border-radius:9px}
+.disc{font-size:11px;color:var(--dim);line-height:1.5;margin-top:14px;
+  padding-left:11px;border-left:2px solid var(--track)}
+.gate{margin-top:9px;background:linear-gradient(135deg,#173c40,#102e35);
+  border:1px solid rgba(232,192,106,.4);border-radius:var(--r);padding:15px 16px}
+.gate h4{font-size:13.5px;font-weight:700;margin-bottom:6px}
+.gate p{font-size:12.5px;color:var(--muted);line-height:1.45}
+.gate .pips{display:flex;gap:6px;margin-top:11px}
+.gate .pips i{flex:1;height:5px;border-radius:9px;background:var(--track)}
+.gate .pips i.on{background:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="stage-head">
+  <div class="titles">
+    <div class="eyebrow">Бизнес-помощник · СберБизнес</div>
+    <h1>Марина и её кофейня: <em>кликабельный прототип чек-апа</em></h1>
+  </div>
+  <div class="nav" role="tablist" aria-label="Экраны">
+    <button role="tab" aria-selected="true" data-go="start">Пусто</button>
+    <button role="tab" aria-selected="false" data-go="onb">Онбординг</button>
+    <button role="tab" aria-selected="false" data-go="home">Главная</button>
+    <button role="tab" aria-selected="false" data-go="diary">Дневник</button>
+    <button role="tab" aria-selected="false" data-go="rhythm">Ритм</button>
+    <button role="tab" aria-selected="false" data-go="quiz">Чек-ап</button>
+    <button role="tab" aria-selected="false" data-go="result">Итог</button>
+    <button role="tab" aria-selected="false" data-go="span">Долголетие</button>
+    <button role="tab" aria-selected="false" data-go="levels">Уровни</button>
+  </div>
+</div>
+
+<div class="phone">
+  <div class="notch"></div>
+  <div class="status"><span>9:41</span><span>Пульс бизнеса</span></div>
+
+  <!-- ============ ГЛАВНАЯ ============ -->
+  <section class="screen" id="home">
+    <div class="app-title"><span class="dot"></span> Кофейня «Пар», ИП Соколова М.</div>
+
+    <div class="journal">
+      <h4>Как прошёл день?</h4>
+      <p>Три вопроса, двадцать секунд. Отвечали 5 дней из 7.</p>
+      <div class="choice"><button class="yes" data-go="diary">Ответить</button><button>Позже</button></div>
+    </div>
+
+    <div class="ringwrap">
+      <div class="ring">
+        <svg width="216" height="216" viewBox="0 0 216 216">
+          <circle class="bg" cx="108" cy="108" r="92" stroke-width="15"></circle>
+          <circle class="fg" id="mainArc" cx="108" cy="108" r="92" stroke-width="15"
+                  stroke-dasharray="578" stroke-dashoffset="578"></circle>
+        </svg>
+        <div class="center">
+          <div class="big"><span id="mainVal">0</span><span class="delta">+5</span></div>
+          <div class="cap">Состояние бизнеса</div>
+        </div>
+      </div>
+      <div class="badge">+5 за квартал · уверенность оценки 62%</div>
+    </div>
+
+    <div class="pulse">
+      <div class="pulse-top"><span>РИТМ ОПЕРАЦИЙ</span><b>34 платежа за неделю</b></div>
+      <svg viewBox="0 0 300 34" preserveAspectRatio="none" aria-hidden="true">
+        <polyline points="0,24 18,24 24,10 30,30 36,24 54,24 60,8 66,31 72,24 96,24 102,12 108,29 114,24 138,24 144,6 150,32 156,24 186,24 192,14 198,28 204,24 240,24 246,11 252,30 258,24 300,24"
+          fill="none" stroke="var(--mint)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+      <div class="pulse-top" style="margin:6px 0 0"><span>Идут ровно, провалов в поступлениях нет</span></div>
+    </div>
+
+    <div class="minis">
+      <div class="mini"><div class="val">82</div><div class="lbl">Ликвидность</div>
+        <div class="bar"><i style="width:82%;background:var(--mint)"></i></div></div>
+      <div class="mini"><div class="val">61</div><div class="lbl">Прочность</div>
+        <div class="bar"><i style="width:61%;background:var(--amber)"></i></div></div>
+      <div class="mini"><div class="val">48</div><div class="lbl">Нагрузка</div>
+        <div class="bar"><i style="width:48%;background:var(--amber)"></i></div></div>
+    </div>
+
+
+    <div class="radar">
+      <div class="ic">✓</div>
+      <div class="bd">
+        <div class="t">Ранние признаки</div>
+        <div class="v">Признаков нет</div>
+        <div class="s">Проверено сегодня утром. Показатели держатся в вашей норме.</div>
+      </div>
+    </div>
+
+    <div class="sect">Что важно сегодня</div>
+    <div class="card"><div class="row"><span class="tag risk">Риск</span>
+      <div><h4>Похоже на кассовый разрыв 12–18 марта</h4>
+      <p>По графику платежей не хватает <span class="money">420 000 ₽</span>. Причину пока не вижу.</p></div></div></div>
+
+    <div class="card cta-card">
+      <div class="row"><span class="tag gold">Профиль</span>
+        <div><h4>Полнота профиля 40% · уровень 1</h4>
+        <p>Три вопроса и пара уточнений по ситуации. Саму цифру состояния ответы не меняют,
+           растут уверенность оценки и уровень профиля.</p></div></div>
+      <div class="bar wide"><i style="width:40%;background:var(--gold)"></i></div>
+      <button class="cta inline" data-go="quiz">Пройти квартальный чек-ап</button>
+      <button class="cta ghost" data-go="rhythm">Как устроен чек-ап</button>
+    </div>
+  </section>
+
+
+
+
+  <!-- ============ ПУСТО ============ -->
+  <section class="screen" id="start">
+    <div class="app-title"><span class="dot"></span> Кофейня «Пар», ИП Соколова М.</div>
+
+    <div class="ringwrap">
+      <div class="ring">
+        <svg width="216" height="216" viewBox="0 0 216 216">
+          <circle class="bg" cx="108" cy="108" r="92" stroke-width="15"></circle>
+          <circle cx="108" cy="108" r="92" stroke-width="15" fill="none"
+                  stroke="var(--track)" stroke-dasharray="6 10" stroke-linecap="round"></circle>
+        </svg>
+        <div class="center">
+          <div class="big" style="color:var(--dim)">—</div>
+          <div class="cap">Состояние бизнеса</div>
+        </div>
+      </div>
+      <div class="badge" style="color:var(--muted);background:rgba(255,255,255,.05);border-color:var(--line)">
+        Мало данных · уверенность 18%</div>
+    </div>
+
+    <div class="card cta-card" style="margin-top:22px">
+      <div class="cat c4">Первый шаг</div>
+      <h4>Посчитать состояние вашего бизнеса</h4>
+      <p>Пока я вижу только платежи за два месяца. Этого хватает на общие советы,
+         но не на советы про вашу кофейню. Давайте договоримся о ритме, три минуты.</p>
+      <div class="bar wide"><i style="width:8%;background:var(--gold)"></i></div>
+      <div class="choice"><button class="yes" data-go="onb">Настроить ритм</button><button data-go="home">Позже</button></div>
+    </div>
+
+    <div class="sect">Что уже вижу</div>
+    <div class="card"><div class="cat c0">Наблюдение</div>
+      <h4>Ритм ровный, и это всё, что я вижу</h4>
+      <p>34 платежа за неделю, провалов в поступлениях нет. Для выводов о бизнесе этого мало.</p></div>
+
+    <p class="hint">Настроить ритм можно позже, из раздела «Ритм»</p>
+  </section>
+
+  <!-- ============ ОНБОРДИНГ ============ -->
+  <section class="screen" id="onb" hidden>
+    <div class="app-title"><span class="dot"></span> Настройка ритма</div>
+    <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:18px">
+      Марина, давайте договоримся, как часто я вас беспокою.
+      Поменять можно в любой момент.</p>
+
+    <div class="ob on">
+      <div class="hd"><span class="nm">Каждый день</span><span class="med">вопросов нет</span></div>
+      <p>Смотрю платежи и поступления сам. Пишу, только если что-то выбилось из вашего обычного ритма.</p>
+    </div>
+
+    <div class="ob">
+      <div class="hd"><span class="nm">Дневник</span><span class="med">по желанию</span></div>
+      <p>Три вопроса в день на двадцать секунд. Часть подставлю из вашего календаря.</p>
+      <div class="tog"><button>Включить</button><button class="sel">Не сейчас</button></div>
+    </div>
+
+    <div class="ob">
+      <div class="hd"><span class="nm">Чек-ап</span><span class="med">основной ритм</span></div>
+      <p>Три вопроса и пара уточнений. Чем чаще, тем точнее советы и выше уровень.</p>
+      <div class="tog"><button>Раз в месяц</button><button class="sel">Раз в квартал</button><button>Раз в год</button></div>
+    </div>
+
+    <div class="ob">
+      <div class="hd"><span class="nm">Большой разбор</span><span class="med">раз в год</span></div>
+      <p>Как ваши показатели выглядят рядом с похожими кофейнями, и план на год. Напомню за две недели.</p>
+    </div>
+
+    <button class="cta" data-go="home">Договорились</button>
+    <button class="cta ghost" data-go="start">Пропустить, вернусь позже</button>
+  </section>
+
+  <!-- ============ ДНЕВНИК ============ -->
+  <section class="screen" id="diary" hidden>
+    <div class="app-title"><span class="dot"></span> Месяц закрыт · июль</div>
+
+    <div class="card" style="margin-bottom:18px">
+      <div class="cat c0">Результат месяца</div>
+      <h4>Закрыли лучше отрасли, но расчёты удлинились</h4>
+      <p>Ликвидность 82, запас прочности 61, нагрузка 48. Кофейни рядом просели на 4%,
+         вы выросли на 6%. Покупатели стали платить в среднем на неделю позже.</p>
+    </div>
+
+    <p style="font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:14px">
+      Отметьте, что было в июле. Пятнадцать секунд, чтобы я понял, что на это повлияло.</p>
+
+    <div class="wk">
+      <div><div class="d">Ср</div><div class="n">5</div><div class="p on"></div></div>
+      <div><div class="d">Чт</div><div class="n">6</div><div class="p on"></div></div>
+      <div><div class="d">Пт</div><div class="n">7</div><div class="p on"></div></div>
+      <div><div class="d">Сб</div><div class="n">8</div><div class="p"></div></div>
+      <div><div class="d">Вс</div><div class="n">9</div><div class="p"></div></div>
+      <div><div class="d">Пн</div><div class="n">10</div><div class="p on"></div></div>
+      <div class="today"><div class="d">Вт</div><div class="n">11</div><div class="p" id="todayPip"></div></div>
+    </div>
+
+    <div class="smart">
+      <div class="hd">Расскажите, как прошёл день</div>
+      <div class="btns"><button>Написать</button><button>Наговорить</button></div>
+    </div>
+
+    <div class="sect">Что было в июле</div>
+    <div class="jq"><span>Запускали рекламу?</span>
+      <button data-a="no">✕</button><button data-a="yes">✓</button></div>
+    <div class="jq"><span>Давали отсрочку новому покупателю?</span>
+      <button data-a="no">✕</button><button data-a="yes" class="on-yes">✓</button></div>
+    <p class="why" style="margin:-2px 0 18px">Ответ подставлен: в июле появился новый крупный покупатель</p>
+
+    <div class="sect">Ещё</div>
+    <div class="jq"><span>Поднимали цены?</span>
+      <button data-a="no">✕</button><button data-a="yes">✓</button></div>
+
+    <div class="sect">Заметка</div>
+    <textarea class="jnote" placeholder="Если хочется что-то добавить"></textarea>
+
+    <button class="cta" id="jdone" data-go="home">Готово</button>
+    <p class="hint">Дневник можно пропускать: на уровень профиля он не влияет</p>
+  </section>
+
+  <!-- ============ РИТМ ============ -->
+  <section class="screen" id="rhythm" hidden>
+    <div class="app-title"><span class="dot"></span> Ритм наблюдения</div>
+    <p style="font-size:12.5px;color:var(--muted);line-height:1.55;margin-bottom:18px">
+      Как в медицине: пульс смотрят каждый день, к профильным врачам ходят раз в квартал,
+      диспансеризацию проходят раз в год. Вопросы задаём только на двух нижних уровнях.</p>
+
+    <div class="tier live"><div class="depth"></div><div class="bd">
+      <div class="hd"><span class="nm">Каждый день</span><span class="st">Идёт сейчас</span></div>
+      <div class="med">аналог пульса и шагов</div>
+      <p>Данные банка снимаются сами, вопросов нет. Даёт пульс бизнеса на главной и предупреждение при отклонении.</p>
+    </div></div>
+
+    <div class="tier live"><div class="depth"></div><div class="bd">
+      <div class="hd"><span class="nm">Каждую неделю</span><span class="st">Идёт сейчас</span></div>
+      <div class="med">аналог сводки трекера</div>
+      <p>Один вопрос, и только если есть отклонение. Даёт разбор недели и что важно на следующей.</p>
+    </div></div>
+
+    <div class="tier"><div class="depth"></div><div class="bd">
+      <div class="hd"><span class="nm">Каждый месяц</span><span class="st">3 февраля</span></div>
+      <div class="med">аналог приёма у терапевта</div>
+      <p>Сводка от профильных агентов: финансы, налоги, кадры, технологии. Плюс бенчмарк по похожим компаниям.</p>
+    </div></div>
+
+    <div class="tier next"><div class="depth"></div><div class="bd">
+      <div class="hd"><span class="nm">Каждый квартал</span><span class="st">Пора</span></div>
+      <div class="med">аналог профильных врачей</div>
+      <p>Сам чек-ап: три вопроса и уточнения по вашим данным. Даёт состояние бизнеса, уровень профиля и награду.</p>
+    </div></div>
+
+    <div class="tier"><div class="depth"></div><div class="bd">
+      <div class="hd"><span class="nm">Раз в год</span><span class="st">Ноябрь</span></div>
+      <div class="med">аналог диспансеризации</div>
+      <p>Пересборка профиля по всем доменам, подключение 1С, CRM и маркетплейсов. Открывает раздел «Долголетие».</p>
+    </div></div>
+
+    <button class="cta" data-go="quiz">Пройти квартальный чек-ап</button>
+  </section>
+
+  <!-- ============ ЧЕК-АП ============ -->
+  <section class="screen" id="quiz" hidden>
+    <div class="qhead">
+      <div class="qring">
+        <svg width="44" height="44" viewBox="0 0 44 44">
+          <circle class="bg" cx="22" cy="22" r="18" stroke-width="4"></circle>
+          <circle class="fg" id="qArc" cx="22" cy="22" r="18" stroke-width="4"
+                  stroke-dasharray="113" stroke-dashoffset="68"></circle>
+        </svg>
+        <b id="qPct">40</b>
+      </div>
+      <div class="qmeta">
+        <div class="t">Квартальный чек-ап</div>
+        <div class="s" id="qStep">Вопрос 1 из 3</div>
+      </div>
+    </div>
+    <div id="thread"></div>
+    <div class="chips" id="chips"></div>
+    <div class="freeform" id="freeform">
+      <input id="freeInput" type="text" placeholder="Или ответьте своими словами" autocomplete="off"
+             aria-label="Свой ответ">
+      <button id="freeSend" aria-label="Отправить ответ">→</button>
+    </div>
+  </section>
+
+  <!-- ============ ИТОГ ============ -->
+  <section class="screen" id="result" hidden>
+    <div class="app-title"><span class="dot"></span> Чек-ап завершён</div>
+
+    <div class="ringwrap">
+      <div class="ring">
+        <svg width="216" height="216" viewBox="0 0 216 216">
+          <circle class="bg" cx="108" cy="108" r="92" stroke-width="15"></circle>
+          <circle class="fg" id="resArc" cx="108" cy="108" r="92" stroke-width="15"
+                  stroke-dasharray="578" stroke-dashoffset="578"></circle>
+        </svg>
+        <div class="center">
+          <div class="big">76</div>
+          <div class="cap">Состояние бизнеса</div>
+        </div>
+      </div>
+      <div class="badge">Без изменений · уверенность 62% → <b>84%</b></div>
+    </div>
+
+    <p class="explain">Состояние считается по деньгам и фактам, саму цифру ответы не меняют.
+      Они объясняют, почему она такая, и поднимают уверенность оценки.</p>
+
+    <div class="prof">
+      <div class="prof-top"><span>Полнота профиля</span><span><b>40% → 60%</b></span></div>
+      <div class="bar wide"><i style="width:60%;background:var(--gold)"></i></div>
+      <div class="prof-note">Уровень 2 открыт</div>
+    </div>
+
+    <div class="sect">Что изменилось после ответов</div>
+
+    <div class="card">
+      <div class="cat c0">Причина найдена</div>
+      <h4>Разрыв 12–18 марта объяснился</h4>
+      <p>Отсрочка поставщику 45 дней приходится на сезонный спад. Подобрал две даты платежа, при которых разрыва нет.</p>
+    </div>
+    <div class="card">
+      <div class="cat c0">Сравнение с рынком</div>
+      <h4>На персонал уходит больше, чем у похожих</h4>
+      <p>Кофейни вашего размера в вашем регионе тратят на персонал <span class="money">22%</span> выручки. У вас <span class="money">31%</span>.</p>
+    </div>
+    <div class="sect">Что предлагаю сделать</div>
+    <div class="scale">
+      <div class="a1">Настройка<b>сегодня, бесплатно</b></div>
+      <div class="a2">Процесс<b>пара недель</b></div>
+      <div class="a3">Крупное решение<b>деньги и последствия</b></div>
+    </div>
+    <div class="card">
+      <div class="cat c1">Настройка · налоги</div>
+      <h4>Перейти на льготную ставку УСН 1%</h4>
+      <p>По вашему ОКВЭД и региону она действует, вы платите 6%. Экономия <span class="money">≈380 000 ₽</span> в год, заявление подаётся один раз.</p>
+      <div class="choice"><button class="yes">Делаем</button><button>Не сейчас</button></div>
+    </div>
+    <div class="card">
+      <div class="cat c1">Настройка · кадры</div>
+      <h4>Привязать часть оклада к выручке</h4>
+      <p>На оклад приходится 80% фонда оплаты, переменная часть почти не связана с продажами. Схему меняем для трёх бариста, это правка в трудовых договорах.</p>
+      <div class="choice"><button class="yes">Делаем</button><button>Не сейчас</button></div>
+    </div>
+    <div class="card">
+      <div class="cat c2">Процесс · учёт</div>
+      <h4>Свести кассу с учётом автоматически</h4>
+      <p>Сейчас выгрузки вручную раз в неделю, сводка отстаёт, часть возвратов теряется. Меняется процесс, займёт две недели.</p>
+      <div class="choice"><button class="yes">Делаем</button><button>Не сейчас</button></div>
+    </div>
+    <div class="card">
+      <div class="cat c3">Крупное решение · деньги</div>
+      <h4>Кредитная линия на кассовый разрыв</h4>
+      <p>Разрыв закрывается переносом двух платежей, деньги брать не обязательно. Держу вариант на случай, если перенос не согласуют.</p>
+      <div class="choice"><button>Показать условия</button><button>Не нужно</button></div>
+    </div>
+    <div class="card">
+      <div class="cat c0">Наблюдение</div>
+      <h4>Два месяца вы работали в режиме тушения</h4>
+      <p>40% платежей уходило в последнюю неделю месяца, четыре новых поставщика за квартал, ни одного дня без операций. Похоже, на стратегию времени не оставалось.</p>
+    </div>
+    <div class="sect">Открылся уровень 2</div>
+    <div class="card"><div class="row"><span class="tag gold">Награда</span>
+      <div><h4>Скидка на РКО 70% и прогноз разрывов</h4>
+      <p>Начисляется за свежесть профиля, содержание ответов на уровень не влияет. Пропущенный вопрос уровень не понижает.</p></div></div></div>
+
+    <div class="card"><div class="row"><span class="tag gold">Календарь</span>
+      <div><h4>Следующий чек-ап 12 мая, 10:00</h4>
+      <p>Поставил в рабочий календарь. Перенести можно одним сообщением.</p></div></div></div>
+
+    <button class="cta" data-go="span">Посмотреть долголетие бизнеса</button>
+    <button class="cta ghost" data-go="home">Вернуться на главную</button>
+  </section>
+
+  <!-- ============ ДОЛГОЛЕТИЕ ============ -->
+  <section class="screen" id="span" hidden>
+    <div class="app-title"><span class="dot"></span> Долголетие компании</div>
+
+    <div class="hscale">
+      <div class="lbls"><span class="a">Нужно внимание</span><span class="b">В хорошей форме</span></div>
+      <div class="rail"><div class="knob" style="left:76%"></div></div>
+    </div>
+
+    <h2 style="font-size:21px;font-weight:700;line-height:1.3;letter-spacing:-.02em;margin-bottom:10px">
+      За полгода окрепли расчёты и запас прочности</h2>
+    <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:6px">
+      Покупатели стали платить быстрее, запас прочности вырос, нагрузка держится ровно.
+      Показатели идут лучше, чем у 82% кофеен вашего размера в регионе, полгода назад было 68%.
+      Слабое место осталось одно: половина выручки завязана на двух покупателей.</p>
+    <div class="choice" style="margin-bottom:22px">
+      <button class="yes">Разобрать с помощником</button>
+    </div>
+
+    <div class="pulse">
+      <div class="pulse-top"><span>ЗА ПОСЛЕДНИЕ 6 МЕСЯЦЕВ</span><b>68% → 82%</b></div>
+      <svg viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true">
+        <polyline points="4,28 54,30 104,22 154,24 204,14 254,11 296,9"
+          fill="none" stroke="var(--mint)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="296" cy="9" r="3.5" fill="var(--mint)"/>
+      </svg>
+    </div>
+
+    <div class="sect">Из чего складывается</div>
+    <div class="drv">
+      <div class="drv-row"><span class="t">Расчёты с покупателями</span>
+        <span class="track"><i style="width:82%;background:var(--mint)"></i></span><span class="v">82</span></div>
+      <div class="drv-row"><span class="t">Запас ликвидности</span>
+        <span class="track"><i style="width:76%;background:var(--mint)"></i></span><span class="v">76</span></div>
+      <div class="drv-row"><span class="t">Зависимость от одного клиента</span>
+        <span class="track"><i style="width:41%;background:var(--amber)"></i></span><span class="v">41</span></div>
+      <div class="drv-row"><span class="t">Обновляемость технологий</span>
+        <span class="track"><i style="width:55%;background:var(--amber)"></i></span><span class="v">55</span></div>
+    </div>
+
+    <div class="gate">
+      <h4>Обновляется, пока вы проходите чек-апы</h4>
+      <p>Три из четырёх за год. Следующий до 12 мая, иначе показатель замрёт и покажет дату
+         последнего расчёта.</p>
+      <div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+    </div>
+
+    <p class="disc">Описывает сегодняшнее состояние и как оно менялось. Это не прогноз,
+      не кредитный рейтинг и не оценка вероятности закрытия.</p>
+
+    <button class="cta ghost" data-go="levels">Посмотреть уровни</button>
+  </section>
+
+  <!-- ============ УРОВНИ ============ -->
+  <section class="screen" id="levels" hidden>
+    <div class="app-title"><span class="dot"></span> Уровни</div>
+    <p style="font-size:12.5px;color:var(--muted);line-height:1.55;margin-bottom:20px">
+      Уровень зависит от полноты профиля. Через 90 дней он помечается как требующий обновления,
+      дальше есть ещё 30 дней запаса. Потом уровень падает на одну ступень и остаётся там.</p>
+
+    <div class="lvl on"><div class="top"><span class="nm">Уровень 1 · Старт</span><span class="pc">40%</span></div>
+      <ul><li>Состояние бизнеса и бенчмарк отрасли</li><li>Сигналы угроз и роста</li></ul>
+      <div class="state" style="margin-top:10px">Пройден</div></div>
+
+    <div class="lvl now"><div class="top"><span class="nm">Уровень 2 · Опора</span><span class="pc">60%</span></div>
+      <ul><li>Прогноз кассового разрыва</li><li>Скидка на РКО 70%</li><li>Разбор модели экспертом</li></ul>
+      <div class="state" style="margin-top:10px">Ваш уровень · обновить до 12 мая, запас 30 дней</div></div>
+
+    <div class="lvl locked"><div class="top"><span class="nm">Уровень 3 · Пилот</span><span class="pc">80%</span></div>
+      <ul><li>Цифровой аватар: тест решений</li><li>Скидка на РКО 80%</li><li>Приоритет по кредитной заявке</li></ul>
+      <div class="state" style="margin-top:10px">Нужны данные учёта</div></div>
+
+    <div class="lvl locked"><div class="top"><span class="nm">Уровень 4 · Мастер</span><span class="pc">100%</span></div>
+      <ul><li>Закрытые программы и спецтарифы</li><li>Персональная ставка</li><li>Менторинг от экспертов</li></ul>
+      <div class="state" style="margin-top:10px">Нужны данные CRM и маркетплейсов</div></div>
+
+    <button class="cta ghost" data-go="home">На главную</button>
+  </section>
+</div>
+
+<p class="footnote">Демонстрационные данные. Ритм: <b>день → неделя → месяц → квартал → год</b>.
+Вопросы клиенту задаются на недельном, квартальном и годовом уровне.</p>
+
+<script>
+(function(){
+  var C=2*Math.PI*92, Q=2*Math.PI*18;
+  var screens=['start','onb','home','diary','rhythm','quiz','result','span','levels'];
+  var tabs=[].slice.call(document.querySelectorAll('.nav button'));
+
+  function show(id){
+    screens.forEach(function(s){ document.getElementById(s).hidden = (s!==id); });
+    tabs.forEach(function(t){
+      var on = t.dataset.go===id;
+      t.setAttribute('aria-selected', String(on));
+      /* на телефоне панель экранов узкая и скроллится — подтягиваем активную вкладку */
+      if(on && t.scrollIntoView) t.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+    });
+    var cur=document.querySelector('.screen:not([hidden])'); if(cur) cur.scrollTop=0;
+    if(id==='home') animateRing('mainArc','mainVal',76);
+    if(id==='result') setArc('resArc',76);
+    if(id==='quiz') startQuiz();
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-go]'); if(b) show(b.dataset.go);
+  });
+  function setArc(id,pct){ document.getElementById(id).style.strokeDashoffset=C*(1-pct/100); }
+  function animateRing(arcId,valId,target){
+    var el=document.getElementById(valId), n=0;
+    setArc(arcId,0);
+    requestAnimationFrame(function(){ setArc(arcId,target); });
+    var t=setInterval(function(){
+      n+=Math.max(1,Math.round((target-n)/6));
+      if(n>=target){n=target;clearInterval(t);}
+      el.textContent=n;
+    },26);
+  }
+
+  var CORE=[
+    {q:'Что для вас главный результат этого года?',
+     why:'Чтобы считать прогресс по вашей цели, а не по обороту.',
+     a:['Вырасти в выручке','Удержать маржу','Открыть вторую точку','Продать бизнес'],
+     n:'Записал цель. Дальше буду считать прогресс по ней.'},
+    {q:'Есть договорённости, которых не видно в платежах?',
+     why:'Отсрочки и займы вне счёта объясняют спады, которые иначе выглядят как падение бизнеса.',
+     a:['Отсрочка поставщику','Аренда мимо счёта','Заём от знакомых','Нет'],
+     n:'Вот и объяснение разрыва в марте: отсрочка 45 дней приходится на сезонный спад.'},
+    {q:'Вижу в данных минус 18% выручки за квартал. Что произошло?',
+     why:'Один и тот же спад может значить уход клиента или перенос контракта. Это разные риски.',
+     a:['Перенесли контракт','Ушёл крупный клиент','Закрыли направление','Сезон'],
+     n:'Понял, это перенос. Уберу квартал из расчёта тренда, реклама вам не нужна.'}
+  ];
+  var ADAPT=[];
+  var QS=CORE.concat(ADAPT);
+  var i=0;
+  var quizEl=document.getElementById('quiz');
+  var thread=document.getElementById('thread');
+  var chips=document.getElementById('chips');
+  var freeform=document.getElementById('freeform');
+  var freeInput=document.getElementById('freeInput');
+
+  function toBottom(){
+    requestAnimationFrame(function(){
+      quizEl.scrollTo({top:quizEl.scrollHeight,behavior:'smooth'});
+    });
+  }
+  function startQuiz(){ thread.innerHTML=''; i=0; ask(true); }
+  function bubble(cls,lines,why){
+    var d=document.createElement('div'); d.className='msg '+cls;
+    lines.forEach(function(t,k){
+      var el=document.createElement('p'); el.textContent=t;
+      if(k) el.style.marginTop='9px';
+      d.appendChild(el);
+    });
+    if(why){ var w=document.createElement('div'); w.className='why'; w.textContent='Зачем: '+why; d.appendChild(w); }
+    thread.appendChild(d); toBottom(); return d;
+  }
+  function progress(){
+    var pct=40+Math.round(i*(20/QS.length));
+    document.getElementById('qPct').textContent=pct;
+    document.getElementById('qArc').style.strokeDashoffset=Q*(1-pct/100);
+    var label;
+    if(i>=QS.length) label='Готово · полнота профиля 60%';
+    else if(i<CORE.length) label='Вопрос '+(i+1)+' из 3';
+    else label='Уточнение '+(i-CORE.length+1)+' · по вашим данным';
+    document.getElementById('qStep').textContent=label;
+  }
+  function ask(first){
+    progress();
+    if(i>=QS.length){ finish(); return; }
+    var lines = first ? [QS[i].q] : [QS[i-1].n, QS[i].q];
+    bubble('bot', lines, QS[i].why);
+    renderChips();
+  }
+  function renderChips(){
+    chips.innerHTML=''; freeform.hidden=false; freeInput.value='';
+    QS[i].a.forEach(function(txt){
+      var b=document.createElement('button'); b.className='chip'; b.textContent=txt;
+      b.onclick=function(){ answer(txt); };
+      chips.appendChild(b);
+    });
+    var sk=document.createElement('button'); sk.className='skip';
+    sk.textContent='Пропустить, уровень не понизится';
+    sk.onclick=function(){ answer('Пропустить',true); };
+    chips.appendChild(sk);
+    toBottom();
+  }
+  function finish(){
+    chips.innerHTML=''; freeform.hidden=true;
+    var btn=document.createElement('button');
+    btn.className='cta'; btn.textContent='Посмотреть результат'; btn.dataset.go='result';
+    chips.appendChild(btn); toBottom();
+  }
+  function answer(txt,skipped){
+    if(!txt || !txt.trim()) return;
+    chips.innerHTML=''; freeform.hidden=true;
+    bubble('me',[skipped?'Пропустить':txt.trim()]);
+    i++;
+    setTimeout(function(){
+      if(i>=QS.length){
+        progress();
+        bubble('bot',[skipped?'Хорошо, пропустили.':QS[i-1].n,
+                      'Пересчитал уверенность оценки и полноту профиля.']);
+        finish();
+      } else { ask(false); }
+    },430);
+  }
+  document.getElementById('freeSend').onclick=function(){ answer(freeInput.value); };
+  freeInput.addEventListener('keydown',function(e){ if(e.key==='Enter') answer(freeInput.value); });
+
+  document.querySelectorAll('.tog').forEach(function(g){
+    g.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        g.querySelectorAll('button').forEach(function(x){ x.classList.remove('sel'); });
+        b.classList.add('sel');
+      });
+    });
+  });
+
+  document.querySelectorAll('.jq').forEach(function(row){
+    row.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        row.querySelectorAll('button').forEach(function(x){ x.classList.remove('on-yes','on-no'); });
+        b.classList.add(b.dataset.a==='yes'?'on-yes':'on-no');
+        var all=[].slice.call(document.querySelectorAll('.jq'));
+        var done=all.every(function(r){ return r.querySelector('.on-yes,.on-no'); });
+        var pip=document.getElementById('todayPip');
+        if(pip) pip.classList.toggle('on',done);
+      });
+    });
+  });
+
+  show('start');
+})();
+</script>
+</body>
+</html>

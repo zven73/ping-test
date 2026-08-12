@@ -225,6 +225,8 @@ h1 em{font-style:normal;color:var(--mint)}
   border-radius:99px;padding:11px 16px;outline:none;transition:border-color .16s}
 .freeform input::placeholder{color:var(--dim)}
 .freeform input:focus{border-color:rgba(47,212,181,.45)}
+.freeform #micBtn{flex:0 0 40px;height:40px;border-radius:99px;border:1px solid rgba(47,212,181,.35);
+  background:rgba(47,212,181,.13);color:var(--mint);font-size:15px;cursor:pointer;line-height:1}
 .freeform button{flex:0 0 40px;height:40px;border-radius:99px;border:0;cursor:pointer;
   background:var(--track);color:var(--ink);font-size:17px;line-height:1;
   transition:background .16s,color .16s}
@@ -360,6 +362,73 @@ h1 em{font-style:normal;color:var(--mint)}
 }
 
 /* ---- ритм поступлений ---- */
+.push{background:linear-gradient(135deg,#16323a,#0f2830);
+  border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:13px 15px;margin-bottom:16px;
+  box-shadow:0 12px 30px -12px rgba(0,0,0,.6)}
+.push .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.push .app{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--dim)}
+.push .app i{width:14px;height:14px;border-radius:4px;background:var(--mint);display:block}
+.push .ago{font-size:10.5px;color:var(--dim)}
+.push h5{font-size:13.5px;font-weight:700;margin-bottom:3px}
+.push p{font-size:12.5px;color:var(--muted);line-height:1.45}
+.expl{background:var(--panel-2);border:1px solid var(--line);border-radius:14px;
+  padding:13px 14px;margin-top:10px}
+.expl .q{font-size:12.5px;font-weight:600;color:var(--mint);margin-bottom:9px}
+.expl .r{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);
+  padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.expl .r:last-of-type{border-bottom:0}
+.expl .r b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.expl .n{font-size:11px;color:var(--dim);line-height:1.45;margin-top:9px}
+.new{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:#06231f;background:var(--mint);padding:2px 7px;border-radius:5px;margin-left:7px;vertical-align:2px}
+.answer{background:linear-gradient(135deg,#12363c,#0f2b33);
+  border:1px solid rgba(47,212,181,.28);border-radius:var(--r);padding:15px 16px;margin-top:14px}
+.answer h4{font-size:14px;font-weight:600;line-height:1.35;margin-bottom:6px}
+.answer p{font-size:12.5px;color:var(--muted);line-height:1.5}
+.answer .act{display:flex;gap:8px;margin-top:12px}
+.answer .act button{flex:1;font:inherit;font-size:12.5px;font-weight:600;padding:11px;
+  border-radius:11px;border:0;background:var(--mint);color:#06231f;cursor:pointer}
+.answer .act button.sec{background:rgba(255,255,255,.05);color:var(--muted);
+  border:1px solid var(--line)}
+.track{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px 16px;margin-top:9px}
+.track .row2{display:flex;align-items:flex-start;gap:11px;margin-bottom:13px}
+.track .row2:last-of-type{margin-bottom:0}
+.track .st{flex:0 0 18px;height:18px;border-radius:99px;display:grid;place-items:center;
+  font-size:10px;margin-top:1px}
+.track .st.ok{background:rgba(47,212,181,.16);color:var(--mint)}
+.track .st.go{background:rgba(232,192,106,.16);color:var(--gold)}
+.track .bd2{flex:1}
+.track .t2{font-size:13px;font-weight:600;line-height:1.35}
+.track .s2{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+.intent{background:linear-gradient(135deg,#14343d,#0f2a33);border:1px solid rgba(47,212,181,.25);
+  border-radius:var(--r);padding:15px 16px;margin-top:9px}
+.intent .q{font-size:12.5px;color:var(--dim);font-style:italic;margin-bottom:9px;
+  padding-left:10px;border-left:2px solid var(--track)}
+.intent h4{font-size:13.5px;font-weight:600;line-height:1.35;margin-bottom:5px}
+.intent p{font-size:12.5px;color:var(--muted);line-height:1.5}
+.cal{background:var(--panel-2);border:1px solid var(--line);border-radius:14px;
+  padding:13px 14px;margin-top:9px}
+.cal .t{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+.cal .ev{display:flex;gap:9px;align-items:baseline;font-size:12.5px;margin-bottom:6px}
+.cal .ev:last-of-type{margin-bottom:0}
+.cal .ev b{color:var(--dim);font-weight:400;font-size:11.5px;flex:0 0 42px;
+  font-variant-numeric:tabular-nums}
+.cal .ev span{flex:1;color:var(--muted)}
+.cal .ev i{font-style:normal;font-size:10.5px;color:var(--mint)}
+.cal .sum{font-size:11.5px;color:var(--mint);margin-top:11px;padding-left:10px;
+  border-left:2px solid rgba(47,212,181,.4);line-height:1.45}
+.voice{display:flex;gap:8px;margin-top:12px}
+.voice button{flex:1;font:inherit;font-size:12.5px;font-weight:600;padding:12px;
+  border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);
+  color:var(--ink);cursor:pointer}
+.voice button.mic{background:rgba(47,212,181,.13);border-color:rgba(47,212,181,.35);color:var(--mint)}
+.team{display:flex;gap:8px;margin-top:9px}
+.team div{flex:1;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;
+  padding:11px 10px;text-align:center}
+.team .v{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+.team .l{font-size:10px;color:var(--dim);margin-top:3px;line-height:1.3}
 .radar{display:flex;align-items:center;gap:12px;background:var(--panel-2);
   border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-top:9px}
 .radar .ic{flex:0 0 34px;height:34px;border-radius:99px;display:grid;place-items:center;
@@ -455,6 +524,15 @@ h1 em{font-style:normal;color:var(--mint)}
   <section class="screen" id="home">
     <div class="app-title"><span class="dot"></span> Кофейня «Пар», ИП Соколова М.</div>
 
+    <div class="push">
+      <div class="top">
+        <div class="app"><i></i> Бизнес-помощник</div>
+        <div class="ago">сейчас</div>
+      </div>
+      <h5>Смотрю на март: похоже на кассовый разрыв</h5>
+      <p>Не хватает 420 000 ₽ между 12 и 18 марта. Причину пока не вижу, но есть два способа обойтись без кредита.</p>
+    </div>
+
     <div class="journal">
       <h4>Как прошёл день?</h4>
       <p>Три вопроса, двадцать секунд. Отвечали 5 дней из 7.</p>
@@ -495,6 +573,34 @@ h1 em{font-style:normal;color:var(--mint)}
     </div>
 
 
+    <div class="expl">
+      <div class="q">Почему 76, а не 60 или 90?</div>
+      <div class="r"><span>Ликвидность: денег хватает на 7 недель</span><b>82</b></div>
+      <div class="r"><span>Прочность: можно взять заказ на 1,5 млн</span><b>61</b></div>
+      <div class="r"><span>Нагрузка: платежи по кредиту 11% выручки</span><b>48</b></div>
+      <div class="n">Сравниваем вас с вами месяц назад и с кофейнями вашего размера в регионе.
+        Ваша норма считается по вашей истории, а не по среднему по банку.</div>
+    </div>
+
+    <div class="answer">
+      <h4>Что это значит сейчас</h4>
+      <p>Денег хватает, но половина выручки завязана на двух покупателях. Если один уйдёт,
+         запас прочности просядет до 30 за месяц.</p>
+      <div class="act">
+        <button>Что сделать</button>
+        <button class="sec">Почему такая оценка</button>
+      </div>
+    </div>
+
+    <div class="cal">
+      <div class="t">Вижу в вашем календаре</div>
+      <div class="ev"><b>10:00</b><span>Переговоры с поставщиком</span><i>3-я за неделю</i></div>
+      <div class="ev"><b>14:30</b><span>Планёрка с командой</span></div>
+      <div class="ev"><b>18:00</b><span>Сдача отчёта в налоговую</span><i>завтра срок</i></div>
+      <div class="sum">Четвёртый день подряд без окна на работу с цифрами.
+        Поставить час в четверг?</div>
+    </div>
+
     <div class="radar">
       <div class="ic">✓</div>
       <div class="bd">
@@ -502,6 +608,30 @@ h1 em{font-style:normal;color:var(--mint)}
         <div class="v">Признаков нет</div>
         <div class="s">Проверено сегодня утром. Показатели держатся в вашей норме.</div>
       </div>
+    </div>
+
+    <div class="sect">Вы спрашивали про кредит</div>
+    <div class="intent">
+      <div class="q">«Какие условия по кредиту на 2 млн?»</div>
+      <h4>Похоже, речь про вторую точку</h4>
+      <p>Вы называли её целью на полугодие. Посчитал два пути: кредит на 2 млн и открытие
+         на обороте с переносом платежей. Второй дешевле на 240 тыс.</p>
+    </div>
+
+    <div class="sect">В работе</div>
+    <div class="track">
+      <div class="row2"><span class="st ok">✓</span><div class="bd2">
+        <div class="t2">Заявление на льготную ставку УСН</div>
+        <div class="s2">Подано 4 марта, принято. Экономия пойдёт со следующего квартала</div>
+      </div></div>
+      <div class="row2"><span class="st go">→</span><div class="bd2">
+        <div class="t2">Перенос двух платежей поставщику</div>
+        <div class="s2">Согласовано с поставщиком, жду подтверждения. Напомню 10 марта</div>
+      </div></div>
+      <div class="row2"><span class="st go">→</span><div class="bd2">
+        <div class="t2">Новая схема оплаты для бариста</div>
+        <div class="s2">Договоры на подписи. Проверю эффект на следующем чек-апе</div>
+      </div></div>
     </div>
 
     <div class="sect">Что важно сегодня</div>
@@ -604,6 +734,14 @@ h1 em{font-style:normal;color:var(--mint)}
          вы выросли на 6%. Покупатели стали платить в среднем на неделю позже.</p>
     </div>
 
+        <div class="expl" style="margin:0 0 16px 0">
+      <div class="q">Что я уже знаю из вашего календаря</div>
+      <div class="r"><span>Дней без единой встречи</span><b>3</b></div>
+      <div class="r"><span>Часов на планёрки и текучку</span><b>41</b></div>
+      <div class="r"><span>Времени на работу над бизнесом</span><b>2 ч</b></div>
+      <div class="n">Два часа за месяц. В феврале было девять, и тогда же вы запускали новое меню.</div>
+    </div>
+
     <p style="font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:14px">
       Отметьте, что было в июле. Пятнадцать секунд, чтобы я понял, что на это повлияло.</p>
 
@@ -618,8 +756,13 @@ h1 em{font-style:normal;color:var(--mint)}
     </div>
 
     <div class="smart">
-      <div class="hd">Расскажите, как прошёл день</div>
-      <div class="btns"><button>Написать</button><button>Наговорить</button></div>
+      <div class="hd">Проще наговорить, чем отмечать</div>
+      <div class="voice">
+        <button class="mic">Наговорить</button>
+        <button>Написать</button>
+      </div>
+      <p style="font-size:11.5px;color:var(--dim);line-height:1.45;margin-top:10px">
+        Разберу на отметки сам. Что не пойму, спрошу.</p>
     </div>
 
     <div class="sect">Что было в июле</div>
@@ -699,7 +842,8 @@ h1 em{font-style:normal;color:var(--mint)}
     <div id="thread"></div>
     <div class="chips" id="chips"></div>
     <div class="freeform" id="freeform">
-      <input id="freeInput" type="text" placeholder="Или ответьте своими словами" autocomplete="off"
+      <button id="micBtn" aria-label="Ответить голосом" title="Ответить голосом">🎙</button>
+      <input id="freeInput" type="text" placeholder="Скажите или напишите своими словами" autocomplete="off"
              aria-label="Свой ответ">
       <button id="freeSend" aria-label="Отправить ответ">→</button>
     </div>
@@ -733,7 +877,7 @@ h1 em{font-style:normal;color:var(--mint)}
       <div class="prof-note">Уровень 2 открыт</div>
     </div>
 
-    <div class="sect">Что изменилось после ответов</div>
+    <div class="sect">Чего не было в прошлый раз<span class="new">Новое</span></div>
 
     <div class="card">
       <div class="cat c0">Причина найдена</div>
@@ -741,10 +885,23 @@ h1 em{font-style:normal;color:var(--mint)}
       <p>Отсрочка поставщику 45 дней приходится на сезонный спад. Подобрал две даты платежа, при которых разрыва нет.</p>
     </div>
     <div class="card">
-      <div class="cat c0">Сравнение с рынком</div>
+      <div class="cat c0">Впервые вижу</div>
       <h4>На персонал уходит больше, чем у похожих</h4>
       <p>Кофейни вашего размера в вашем регионе тратят на персонал <span class="money">22%</span> выручки. У вас <span class="money">31%</span>.</p>
     </div>
+    <div class="sect">Люди</div>
+    <div class="card">
+      <div class="cat c0">Здоровье компании это и здоровье команды</div>
+      <h4>Двое бариста работают шестой месяц без отпуска</h4>
+      <p>По зарплатному проекту вижу отсутствие отпускных выплат. В общепите это первый
+         предвестник ухода, а найм и обучение обойдутся дороже подмены.</p>
+      <div class="team">
+        <div><div class="v">6</div><div class="l">человек в команде</div></div>
+        <div><div class="v">2</div><div class="l">без отпуска полгода</div></div>
+        <div><div class="v">1,4</div><div class="l">оборот за год</div></div>
+      </div>
+    </div>
+
     <div class="sect">Что предлагаю сделать</div>
     <div class="scale">
       <div class="a1">Настройка<b>сегодня, бесплатно</b></div>
@@ -788,6 +945,14 @@ h1 em{font-style:normal;color:var(--mint)}
     <div class="card"><div class="row"><span class="tag gold">Календарь</span>
       <div><h4>Следующий чек-ап 12 мая, 10:00</h4>
       <p>Поставил в рабочий календарь. Перенести можно одним сообщением.</p></div></div></div>
+
+    <div class="sect">Что дальше</div>
+    <div class="card">
+      <div class="cat c4">Сопровождение</div>
+      <h4>Веду два решения до результата</h4>
+      <p>Заявление на УСН: напомню 20 августа, проверю статус в сентябре.
+         Схема оплаты бариста: вернусь через месяц и покажу, изменилась ли выручка на человека.</p>
+    </div>
 
     <button class="cta" data-go="span">Посмотреть долголетие бизнеса</button>
     <button class="cta ghost" data-go="home">Вернуться на главную</button>

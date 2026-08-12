@@ -225,8 +225,16 @@ h1 em{font-style:normal;color:var(--mint)}
   border-radius:99px;padding:11px 16px;outline:none;transition:border-color .16s}
 .freeform input::placeholder{color:var(--dim)}
 .freeform input:focus{border-color:rgba(47,212,181,.45)}
-.freeform #micBtn{flex:0 0 40px;height:40px;border-radius:99px;border:1px solid rgba(47,212,181,.35);
-  background:rgba(47,212,181,.13);color:var(--mint);font-size:15px;cursor:pointer;line-height:1}
+.freeform{gap:10px}
+.freeform #micBtn{flex:0 0 52px;height:52px;border-radius:99px;border:0;cursor:pointer;
+  background:var(--mint);color:#06231f;display:grid;place-items:center;padding:0;
+  box-shadow:0 0 0 0 rgba(47,212,181,.45);transition:box-shadow .2s,transform .12s}
+.freeform #micBtn:hover{transform:scale(1.04)}
+.freeform #micBtn:active{transform:scale(.96)}
+.freeform #micBtn svg{width:22px;height:22px;display:block}
+.freeform #micBtn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.freeform input{height:52px;border-radius:26px;padding:0 20px}
+.freeform #freeSend{flex:0 0 52px;height:52px;border-radius:99px}
 .freeform button{flex:0 0 40px;height:40px;border-radius:99px;border:0;cursor:pointer;
   background:var(--track);color:var(--ink);font-size:17px;line-height:1;
   transition:background .16s,color .16s}
@@ -288,6 +296,7 @@ h1 em{font-style:normal;color:var(--mint)}
 }
 /* ============================================================
    МОБИЛЬНЫЙ РЕЖИМ: макет телефона превращается в само приложение
+   Вставляется скриптом apply-mobile.mjs вместо @media (max-width:460px)
    ============================================================ */
 @media (max-width:760px), (pointer:coarse) and (max-width:900px){
   html{height:100%}
@@ -440,6 +449,14 @@ h1 em{font-style:normal;color:var(--mint)}
 .radar .v{font-size:14px;font-weight:600;margin-top:3px}
 .radar.warn .v{color:var(--amber)}
 .radar .s{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+.empty{display:flex;flex-direction:column;align-items:center;margin:14px 0 4px}
+.empty svg{display:block}
+.empty .cap2{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--dim);margin-top:16px}
+.empty .sub2{font-size:12.5px;color:var(--muted);margin-top:8px;text-align:center;
+  line-height:1.5;max-width:270px}
+@keyframes sweep{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes blink{0%,45%{opacity:.25}50%,95%{opacity:.9}100%{opacity:.25}}
 .hscale{margin:6px 0 18px}
 .hscale .lbls{display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.12em;
   text-transform:uppercase;font-family:"IBM Plex Mono",monospace;margin-bottom:8px}
@@ -651,27 +668,39 @@ h1 em{font-style:normal;color:var(--mint)}
   <section class="screen" id="start">
     <div class="app-title"><span class="dot"></span> Кофейня «Пар», ИП Соколова М.</div>
 
-    <div class="ringwrap">
-      <div class="ring">
-        <svg width="216" height="216" viewBox="0 0 216 216">
-          <circle class="bg" cx="108" cy="108" r="92" stroke-width="15"></circle>
-          <circle cx="108" cy="108" r="92" stroke-width="15" fill="none"
-                  stroke="var(--track)" stroke-dasharray="6 10" stroke-linecap="round"></circle>
-        </svg>
-        <div class="center">
-          <div class="big" style="color:var(--dim)">—</div>
-          <div class="cap">Состояние бизнеса</div>
-        </div>
-      </div>
-      <div class="badge" style="color:var(--muted);background:rgba(255,255,255,.05);border-color:var(--line)">
-        Мало данных · уверенность 18%</div>
+    <div class="empty">
+      <svg width="200" height="200" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+        <circle cx="100" cy="100" r="86" stroke="var(--track)" stroke-width="1.5"
+                stroke-dasharray="3 7" opacity=".7"/>
+        <circle cx="100" cy="100" r="62" stroke="var(--track)" stroke-width="1.5"
+                stroke-dasharray="3 7" opacity=".45"/>
+        <g style="transform-origin:100px 100px;animation:sweep 9s linear infinite">
+          <path d="M100 100 L100 14 A86 86 0 0 1 168 58 Z" fill="var(--mint)" opacity=".07"/>
+          <line x1="100" y1="100" x2="100" y2="14" stroke="var(--mint)" stroke-width="1.5" opacity=".5"/>
+        </g>
+        <circle cx="139" cy="72" r="3" fill="var(--mint)" opacity=".55"
+                style="animation:blink 4s ease-in-out infinite"/>
+        <circle cx="66" cy="128" r="2.5" fill="var(--mint)" opacity=".4"
+                style="animation:blink 5.5s ease-in-out infinite"/>
+        <circle cx="122" cy="140" r="2" fill="var(--mint)" opacity=".35"
+                style="animation:blink 6.5s ease-in-out infinite"/>
+        <g style="transform-origin:100px 100px">
+          <circle cx="92" cy="92" r="27" stroke="var(--mint)" stroke-width="3.5" fill="none"/>
+          <circle cx="92" cy="92" r="27" fill="var(--mint)" opacity=".07"/>
+          <line x1="111" y1="111" x2="128" y2="128" stroke="var(--mint)" stroke-width="4"
+                stroke-linecap="round"/>
+          <path d="M82 96 l6 -7 l6 5 l8 -11" stroke="var(--mint)" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".8"/>
+        </g>
+      </svg>
+      <div class="cap2">Состояние бизнеса</div>
+      <div class="sub2">Считаю. Пока вижу только платежи за два месяца, для выводов этого мало</div>
     </div>
 
     <div class="card cta-card" style="margin-top:22px">
       <div class="cat c4">Первый шаг</div>
       <h4>Посчитать состояние вашего бизнеса</h4>
-      <p>Пока я вижу только платежи за два месяца. Этого хватает на общие советы,
-         но не на советы про вашу кофейню. Давайте договоримся о ритме, три минуты.</p>
+      <p>Общие советы могу дать хоть сейчас. Чтобы они были про вашу кофейню, договоримся о ритме. Три минуты.</p>
       <div class="bar wide"><i style="width:8%;background:var(--gold)"></i></div>
       <div class="choice"><button class="yes" data-go="onb">Настроить ритм</button><button data-go="home">Позже</button></div>
     </div>
@@ -681,7 +710,7 @@ h1 em{font-style:normal;color:var(--mint)}
       <h4>Ритм ровный, и это всё, что я вижу</h4>
       <p>34 платежа за неделю, провалов в поступлениях нет. Для выводов о бизнесе этого мало.</p></div>
 
-    <p class="hint">Настроить ритм можно позже, из раздела «Ритм»</p>
+    <p class="hint">Ритм можно настроить позже</p>
   </section>
 
   <!-- ============ ОНБОРДИНГ ============ -->
@@ -774,7 +803,7 @@ h1 em{font-style:normal;color:var(--mint)}
     <textarea class="jnote" placeholder="Если хочется что-то добавить"></textarea>
 
     <button class="cta" id="jdone" data-go="home">Готово</button>
-    <p class="hint">Дневник можно пропускать: на уровень профиля он не влияет</p>
+    <p class="hint">Можно пропускать, на уровень это не влияет</p>
   </section>
 
   <!-- ============ РИТМ ============ -->
@@ -836,7 +865,15 @@ h1 em{font-style:normal;color:var(--mint)}
     <div id="thread"></div>
     <div class="chips" id="chips"></div>
     <div class="freeform" id="freeform">
-      <button id="micBtn" aria-label="Ответить голосом" title="Ответить голосом">🎙</button>
+      <button id="micBtn" aria-label="Ответить голосом" title="Ответить голосом">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="9" y="2.5" width="6" height="11" rx="3" fill="currentColor"/>
+          <path d="M5.5 11a6.5 6.5 0 0 0 13 0" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round"/>
+          <line x1="12" y1="17.5" x2="12" y2="21" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round"/>
+        </svg>
+      </button>
       <input id="freeInput" type="text" placeholder="Скажите или напишите своими словами" autocomplete="off"
              aria-label="Свой ответ">
       <button id="freeSend" aria-label="Отправить ответ">→</button>
